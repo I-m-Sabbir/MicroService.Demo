@@ -1,0 +1,40 @@
+﻿@page "/"
+@inject frontend.blazor.Clients.PersonClient client
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@if (People.Count > 0)
+{
+    <div class="card">
+        <div class="card-header">People</div>
+        <div class="card-body">
+            @foreach (var person in People)
+            {
+                <div class="row">
+                    <div class="col-2">@person.Id</div>
+                    <div class="col-7">@person.Name</div>
+                    <div class="col-3">@person.Age</div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+@code {
+    public List<Person> People { get; set; } = new List<Person>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        People = await client.GetPeopleAsync();
+
+        People = People.Count > 0 ? People : new List<Person>();
+    }
+}
