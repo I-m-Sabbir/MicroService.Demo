@@ -1,0 +1,23 @@
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<div class="card">
+    <div class="card-header">People</div>
+    <div class="card-body">
+        @foreach(var person in Model.People)
+        {
+            <div class="row">
+                <div class="col-2">@person.Id</div>
+                <div class="col-7">@person.Name</div>
+                <div class="col-3">@person.Age</div>
+            </div>
+        }
+    </div>
+    <div class="card-footer"></div>
+</div>
