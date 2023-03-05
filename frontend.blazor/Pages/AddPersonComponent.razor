@@ -1,0 +1,19 @@
+﻿@typeparam TItem
+
+@if (Person is not null)
+{
+    var properties = Person.GetType().GetProperties();
+    <div class="card">
+        <div class="card-body">
+            @foreach (var item in properties)
+            {
+                <p><strong>@item.Name :</strong>@item.GetValue(Person)</p>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public TItem? Person { get; set; }
+}

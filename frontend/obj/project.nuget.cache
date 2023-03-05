@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Wk6nKsO/zWMLbHL1vrJT0dBATKdWMQNU9GeWT9ptK5rxybS1XbwGiWTYP60WJbri4TrHWPW7iT7GH4InA/aEqQ==",
+  "dgSpecHash": "hthSIdHEK1PydhI9xC6YNTUnMonq81b+K0F233ed5OqOtff3N5Vuub4Z/V+4+te3u65vu8MlbjVvdVdQnlJ9fw==",
   "success": true,
   "projectFilePath": "D:\\MicroService.Demo\\frontend\\frontend.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\PC01\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512"
+    "C:\\Users\\PC01\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
+    "C:\\Users\\PC01\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
   ],
   "logs": []
 }

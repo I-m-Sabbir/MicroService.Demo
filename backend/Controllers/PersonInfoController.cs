@@ -27,6 +27,8 @@ namespace backend.Controllers
         [HttpPost]
         public async Task Post(Person person)
         {
+            person.Id = People.Count + 1;
+
             await Task.Run(() =>
             {
                 People.Add(person);

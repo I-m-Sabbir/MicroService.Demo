@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using Blazored.Modal.Services;
+@using Blazored.Modal;
+@using FluentValidation;
 @inject frontend.blazor.Clients.PersonClient client
 
 <PageTitle>Index</PageTitle>
@@ -16,20 +19,27 @@ Welcome to your new app.
         <div class="card-body">
             @foreach (var person in People)
             {
-                <div class="row">
+                <div class="row p-1">
                     <div class="col-2">@person.Id</div>
-                    <div class="col-7">@person.Name</div>
-                    <div class="col-3">@person.Age</div>
+                    <div class="col-5">@person.Name</div>
+                    <div class="col-2">@person.Age</div>
+                    <div class="col-3">
+                        <button class="btn btn-sm btn-outline-info rounded" @onclick="@(() => Info(person.Id))">Details</button>
+                    </div>
                 </div>
+                <hr />
             }
         </div>
     </div>
 }
 
-
-
 @code {
     public List<Person> People { get; set; } = new List<Person>();
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
+    private Person? person = new Person();
+
+    private bool showAdd = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,4 +47,21 @@ Welcome to your new app.
 
         People = People.Count > 0 ? People : new List<Person>();
     }
+
+    private void Info(int id)
+    {
+        person = People.FirstOrDefault(x => x.Id == id);
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(Person), person);
+        ModalOptions options = new ModalOptions
+            {
+                AnimationType = ModalAnimationType.FadeInOut,
+                DisableBackgroundCancel = true,
+                Position = ModalPosition.Middle,
+                Size = ModalSize.Large,
+            };
+        Modal.Show<AddPersonComponent<Person>>("Personal Information", parameters: parameters, options: options);
+    }
+
+
 }

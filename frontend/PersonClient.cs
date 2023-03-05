@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -29,7 +31,7 @@ namespace frontend
                 if (response is not null)
                 {
                     var stream = await response.Content.ReadAsStreamAsync();
-                    return await JsonSerializer.DeserializeAsync<List<Person>>(stream, _options);
+                    return await System.Text.Json.JsonSerializer.DeserializeAsync<List<Person>>(stream, _options);
                 }
             }
             catch (HttpRequestException ex)
@@ -38,6 +40,28 @@ namespace frontend
             }
 
             return new List<Person>();
+        }
+
+        public async Task<bool> AddPersonAsync(Person person)
+        {
+            bool isSuccess = false;
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(person), Encoding.UTF8, "application/json");
+                var response = await _client.PostAsync("/PersonInfo", content);
+                
+                if(response is not null)
+                {
+                    response.EnsureSuccessStatusCode();
+                    isSuccess = true;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw ex;
+            }
+
+            return isSuccess;
         }
     }
 }

@@ -28,5 +28,15 @@ namespace frontend.Pages
             else
                 ErrorMessage = string.Empty;
         }
+
+        public async Task OnPost([FromServices] PersonClient client, Person person)
+        {
+            if (await client.AddPersonAsync(person))
+                ErrorMessage = string.Empty;
+            else
+                ErrorMessage = "Something Went Wrong";
+
+            People = await client.GetPeopleAsync();
+        }
     }
 }

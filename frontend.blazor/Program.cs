@@ -1,8 +1,8 @@
-using System;
+using Blazored.Modal;
 using frontend.blazor.Clients;
 using frontend.blazor.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,8 @@ builder.Services.AddHttpClient<PersonClient>(client =>
     var baseAddress = new Uri(builder.Configuration.GetValue<string>("backendUrl"));
     client.BaseAddress = baseAddress;
 });
+
+builder.Services.AddBlazoredModal();
 
 var app = builder.Build();
 
